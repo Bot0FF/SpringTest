@@ -37,10 +37,15 @@ public class Controller {
         return Collections.singletonMap("response", "Вы успешно удалили питомца");
     }
 
-    //id передается в адресной строке, информация о Pet в body
-    @PutMapping (value = "/replacePet/{id}", consumes = "application/json", produces = "application/json")
-    public Map replacePet(@PathVariable int id, @RequestBody Pet pet) {
-        petModel.replacePet(id, pet);
-        return Collections.singletonMap("response", "Вы успешно заменили питомца");
+    @PutMapping (value = "/replacePet", consumes = "application/json", produces = "application/json")
+    public Map replacePet(@RequestBody Map<String, String> map) {
+        int id = Integer.parseInt(map.get("id"));
+        if(id <= petModel.getAll().size()) {
+            String name = map.get("name");
+            String type = map.get("type");
+            int age = Integer.parseInt(map.get("age"));
+            petModel.replacePet(id, name, type, age);
+            return Collections.singletonMap("response", "Вы успешно заменили питомца");
+        } else return Collections.singletonMap("response", "Такого ID в базе нет :(");
     }
 }
