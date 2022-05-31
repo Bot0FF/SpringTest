@@ -31,8 +31,8 @@ public class PetModel implements Serializable {
         return model;
     }
 
-    public void replacePet(int id, Pet pet) {
-        model.replace(id, pet);
+    public void replacePet(int id, String name, String type, int age) {
+        model.replace(id, new Pet(name, type, age));
     }
 
     public void removePet(int id) {
