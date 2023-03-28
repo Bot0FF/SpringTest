@@ -22,7 +22,11 @@ public class Controller {
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
-    public Map<Integer, Pet> getAll() {
+    public Map getAll() {
+        System.out.println(petModel.getAll() + " " + petModel.getAll().size());
+        if(petModel.getAll().size() == 0) {
+            return Collections.singletonMap("response", "У вас нет ни одного питомца!");
+        } else
         return petModel.getAll();
     }
 
